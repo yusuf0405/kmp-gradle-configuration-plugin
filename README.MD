@@ -1,30 +1,60 @@
-# Compose Multiplatform Application
+# KMP Configuration Plugin
 
-## Before running!
- - check your system with [KDoctor](https://github.com/Kotlin/kdoctor)
- - install JDK 17 or higher on your machine
- - add `local.properties` file to the project root and set a path to Android SDK there
+## Overview
 
-### Android
-To run the application on android device/emulator:  
- - open project in Android Studio and run imported android run configuration
+This Gradle plugin simplifies the configuration of Kotlin Multiplatform (KMP) projects by providing
+predefined dependencies and configurations for common libraries like Ktor, Koin, Room, and more. It
+ensures that necessary extensions for Compose Multiplatform and Android are correctly set up.
 
-To build the application bundle:
- - run `./gradlew :composeApp:assembleDebug`
- - find `.apk` file in `composeApp/build/outputs/apk/debug/composeApp-debug.apk`
-Run android UI tests on the connected device: `./gradlew :composeApp:connectedDebugAndroidTest`
+## Features
 
-### Desktop
-Run the desktop application: `./gradlew :composeApp:run`
-Run desktop UI tests: `./gradlew :composeApp:jvmTest`
+- **Multiplatform Support**: Adds Kotlin Multiplatform extension.
+- **Compose Integration**: Ensures Compose Multiplatform extension is available.
+- **Dependency Management**: Preconfigured dependencies for:
+    - Coroutines
+    - Compose
+    - Koin
+    - Ktor
+    - Room
+    - DataStore
+    - Lifecycle
+    - Coil
+- **Android Configurations**:
+    - Supports both Application and Library modules.
+    - Configures Android-specific settings.
 
-### iOS
-To run the application on iPhone device/simulator:
- - Open `iosApp/iosApp.xcproject` in Xcode and run standard configuration
- - Or use [Kotlin Multiplatform Mobile plugin](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform-mobile) for Android Studio
-Run iOS simulator UI tests: `./gradlew :composeApp:iosSimulatorArm64Test`
+## Installation
 
-### Wasm Browser (Alpha)
-Run the browser application: `./gradlew :composeApp:wasmJsBrowserDevelopmentRun --continue`
-Run browser UI tests: `./gradlew :composeApp:wasmJsBrowserTest`
+Add the plugin to your Gradle project:
+
+```kotlin
+plugins {
+    id("io.joseph.kmp.configuration") version "<last-version>"
+}
+```
+
+## Usage
+
+Once applied, the plugin automatically configures your KMP project. You can access the configuration
+via:
+
+```kotlin
+kmpConfiguration { 
+    // Configure dependencies and settings if needed
+    compose.configureDependencies()
+    koin.configureDependencies()
+}
+```
+
+## Requirements
+
+- Kotlin Multiplatform
+- Compose Multiplatform (if used)
+- Android Gradle Plugin (for Android modules)
+
+## License
+
+This project is licensed under the MIT License.
+
+
 
