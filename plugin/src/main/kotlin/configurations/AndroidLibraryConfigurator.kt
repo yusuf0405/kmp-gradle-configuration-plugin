@@ -1,4 +1,4 @@
-package configuration
+package configurations
 
 import com.android.build.gradle.LibraryExtension
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
