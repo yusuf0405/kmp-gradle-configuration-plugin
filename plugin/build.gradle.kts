@@ -9,8 +9,8 @@ group = libs.versions.groudId.get()
 version = libs.versions.version.get()
 
 gradlePlugin {
-    website = "https://github.com/joseph0405/kmp-gradle-configuration-plugin"
-    vcsUrl = "https://github.com/joseph0405/kmp-gradle-configuration-plugin"
+    website = "https://github.com/yusuf0405/kmp-gradle-configuration-plugin"
+    vcsUrl = "https://github.com/yusuf0405/kmp-gradle-configuration-plugin"
     plugins {
         register("io.joseph.kmp.configuration") {
             id = "io.joseph.kmp.configuration"
@@ -21,9 +21,8 @@ gradlePlugin {
         }
     }
 }
+
 kotlin { explicitApi() }
-
-
 tasks {
     validatePlugins {
         enableStricterValidation = true
