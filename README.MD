@@ -29,7 +29,7 @@ Add the plugin to your Gradle project:
 
 ```kotlin
 plugins {
-    id("io.joseph.kmp.configuration") version "<last-version>"
+    id("io.github.yusuf0405.kmp.configuration") version "<last-version>"
 }
 ```
 
@@ -55,6 +55,3 @@ kmpConfiguration {
 ## License
 
 This project is licensed under the MIT License.
-
-
-
