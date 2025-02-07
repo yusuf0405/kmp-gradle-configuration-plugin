@@ -1,7 +1,7 @@
 [versions]
 
 version = "0.0.1-alpha01"
-groudId = "io.joseph.kmp.configuration"
+groudId = "io.github.yusuf0405.kmp.configuration"
 
 kotlin = "2.1.0"
 compose = "1.7.3"
