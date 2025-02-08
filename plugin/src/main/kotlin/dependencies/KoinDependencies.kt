@@ -4,9 +4,7 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import versions.Versions.koinVersion
 import extensions.dependency
 
-public class KoinDependencies(
-    private val extension: KotlinMultiplatformExtension
-) {
+public class KoinDependencies {
     public val core: String by lazy {
         dependency(
             groupWithArtifact = "io.insert-koin:koin-core",
@@ -35,7 +33,9 @@ public class KoinDependencies(
         )
     }
 
-    public fun configureDependencies(): KotlinMultiplatformExtension = extension.apply {
+    public fun configureDependencies(
+        extension: KotlinMultiplatformExtension
+    ): KotlinMultiplatformExtension = extension.apply {
         sourceSets.apply {
             commonMain.dependencies {
                 implementation(core)

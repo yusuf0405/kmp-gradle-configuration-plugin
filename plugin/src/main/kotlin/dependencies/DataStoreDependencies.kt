@@ -4,9 +4,7 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import versions.Versions.dataStoreVersion
 import extensions.dependency
 
-public class DataStoreDependencies(
-    private val extension: KotlinMultiplatformExtension
-) {
+public class DataStoreDependencies {
     public val core: String by lazy {
         dependency(
             groupWithArtifact = "androidx.datastore:datastore-core-okio",
@@ -20,7 +18,9 @@ public class DataStoreDependencies(
         )
     }
 
-    public fun configureDependencies(): KotlinMultiplatformExtension = extension.apply {
+    public fun configureDependencies(
+        extension: KotlinMultiplatformExtension
+    ): KotlinMultiplatformExtension = extension.apply {
         sourceSets.apply {
             commonMain.dependencies {
                 api(preferences)

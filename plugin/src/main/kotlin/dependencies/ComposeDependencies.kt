@@ -1,15 +1,12 @@
 package dependencies
 
-import org.jetbrains.compose.ComposeExtension
+import extensions.dependency
+import org.jetbrains.compose.ComposePlugin
 import org.jetbrains.compose.ExperimentalComposeLibrary
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
-import extensions.dependency
 import versions.Versions
 
-public class ComposeDependencies(
-    private val composeExtension: ComposeExtension,
-    private val extension: KotlinMultiplatformExtension
-) {
+public class ComposeDependencies {
     public val navigation: String by lazy {
         dependency(
             groupWithArtifact = "org.jetbrains.androidx.navigation:navigation-compose",
@@ -17,8 +14,10 @@ public class ComposeDependencies(
         )
     }
 
-    public fun configureDependencies(): KotlinMultiplatformExtension = extension.apply {
-        val composeDependencies = composeExtension.dependencies
+    public fun configureDependencies(
+        extension: KotlinMultiplatformExtension,
+        composeDependencies: ComposePlugin.Dependencies
+    ): KotlinMultiplatformExtension = extension.apply {
         sourceSets.apply {
             commonMain {
                 dependencies {

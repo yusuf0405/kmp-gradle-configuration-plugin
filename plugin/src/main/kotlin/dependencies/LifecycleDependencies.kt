@@ -4,9 +4,7 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import versions.Versions.lifecycleVersion
 import extensions.dependency
 
-public class LifecycleDependencies(
-    private val extension: KotlinMultiplatformExtension
-) {
+public class LifecycleDependencies {
     public val viewModel: String by lazy {
         dependency(
             groupWithArtifact = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose",
@@ -21,7 +19,9 @@ public class LifecycleDependencies(
         )
     }
 
-    public fun configureDependencies(): KotlinMultiplatformExtension = extension.apply {
+    public fun configureDependencies(
+        extension: KotlinMultiplatformExtension
+    ): KotlinMultiplatformExtension = extension.apply {
         sourceSets.apply {
             commonMain.dependencies {
                 implementation(viewModel)

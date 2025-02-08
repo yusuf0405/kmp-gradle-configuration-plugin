@@ -4,9 +4,7 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import versions.Versions.ktorVersion
 import extensions.dependency
 
-public class KtorDependencies(
-    private val extension: KotlinMultiplatformExtension
-) {
+public class KtorDependencies {
     public val core: String by lazy {
         dependency(
             groupWithArtifact = "io.ktor:ktor-client-core",
@@ -46,7 +44,9 @@ public class KtorDependencies(
         )
     }
 
-    public fun configureDependencies(): KotlinMultiplatformExtension = extension.apply {
+    public fun configureDependencies(
+        extension: KotlinMultiplatformExtension
+    ): KotlinMultiplatformExtension = extension.apply {
         sourceSets.apply {
             commonMain.dependencies {
                 implementation(core)

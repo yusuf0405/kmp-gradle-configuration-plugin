@@ -3,24 +3,12 @@ package configurations
 import com.android.build.api.dsl.ApplicationExtension
 import versions.Versions
 
-public data class AndroidApplicationConfig(
-    val applicationId: String,
-    val versionCode: Int,
-    val versionName: String,
-)
-
-public class AndroidApplicationConfigurator(
-    private val extension: ApplicationExtension,
-) {
-
-    public fun configure(config: AndroidApplicationConfig): ApplicationExtension = extension.apply {
+public class AndroidApplicationConfigurator {
+    public fun configure(extension: ApplicationExtension): ApplicationExtension = extension.apply {
         compileSdk = Versions.androidCompileSdk
         defaultConfig {
             minSdk = Versions.androidMinSdk
             targetSdk = Versions.androidTargetSdk
-            applicationId = config.applicationId
-            versionCode = config.versionCode
-            versionName = config.versionName
         }
         packaging.resources {
             pickFirsts += "/META-INF/LICENSE.md"

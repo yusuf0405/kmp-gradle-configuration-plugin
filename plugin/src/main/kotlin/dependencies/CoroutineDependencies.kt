@@ -4,9 +4,7 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import versions.Versions.coroutineVersion
 import extensions.dependency
 
-public class CoroutineDependencies(
-    private val extension: KotlinMultiplatformExtension
-) {
+public class CoroutineDependencies {
     public val core: String by lazy {
         dependency(
             groupWithArtifact = "org.jetbrains.kotlinx:kotlinx-coroutines-core",
@@ -35,7 +33,9 @@ public class CoroutineDependencies(
         )
     }
 
-    public fun configureDependencies(): KotlinMultiplatformExtension = extension.apply {
+    public fun configureDependencies(
+        extension: KotlinMultiplatformExtension
+    ): KotlinMultiplatformExtension = extension.apply {
         sourceSets.apply {
             commonMain.dependencies {
                 implementation(core)
@@ -43,7 +43,6 @@ public class CoroutineDependencies(
             commonTest.dependencies {
                 implementation(test)
             }
-
             androidMain.dependencies {
                 implementation(android)
             }

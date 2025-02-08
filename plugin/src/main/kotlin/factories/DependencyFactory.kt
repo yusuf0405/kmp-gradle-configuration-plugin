@@ -9,11 +9,9 @@ import dependencies.KotlinXDependencies
 import dependencies.KtorDependencies
 import dependencies.LifecycleDependencies
 import dependencies.RoomDependencies
-import org.jetbrains.compose.ComposeExtension
-import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 
 internal interface DependencyFactory {
-    fun createMultiplatformDependencies(): CoroutineDependencies
+    fun createCoroutineDependencies(): CoroutineDependencies
     fun createComposeDependencies(): ComposeDependencies
     fun createKoinDependencies(): KoinDependencies
     fun createKtorDependencies(): KtorDependencies
@@ -23,18 +21,15 @@ internal interface DependencyFactory {
     fun createCoilDependencies(): CoilDependencies
     fun createKotlinXDependencies(): KotlinXDependencies
 
-    class Default(private val factory: ConfigurationExtensionFactory) : DependencyFactory {
-        private val extension: KotlinMultiplatformExtension by lazy { factory.multiplatformExtension }
-        private val composeExtension: ComposeExtension by lazy { factory.composeExtension }
-
-        override fun createMultiplatformDependencies() = CoroutineDependencies(extension)
-        override fun createComposeDependencies() = ComposeDependencies(composeExtension, extension)
-        override fun createKoinDependencies() = KoinDependencies(extension)
-        override fun createKtorDependencies() = KtorDependencies(extension)
-        override fun createRoomDependencies() = RoomDependencies(extension)
-        override fun createDataStoreDependencies() = DataStoreDependencies(extension)
-        override fun createLifecycleDependencies() = LifecycleDependencies(extension)
-        override fun createCoilDependencies() = CoilDependencies(extension)
-        override fun createKotlinXDependencies(): KotlinXDependencies = KotlinXDependencies(extension)
+    class Default : DependencyFactory {
+        override fun createCoroutineDependencies() = CoroutineDependencies()
+        override fun createComposeDependencies() = ComposeDependencies()
+        override fun createKoinDependencies() = KoinDependencies()
+        override fun createKtorDependencies() = KtorDependencies()
+        override fun createRoomDependencies() = RoomDependencies()
+        override fun createDataStoreDependencies() = DataStoreDependencies()
+        override fun createLifecycleDependencies() = LifecycleDependencies()
+        override fun createCoilDependencies() = CoilDependencies()
+        override fun createKotlinXDependencies(): KotlinXDependencies = KotlinXDependencies()
     }
 }

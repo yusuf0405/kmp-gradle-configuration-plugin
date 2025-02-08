@@ -4,11 +4,26 @@ import com.android.build.gradle.LibraryExtension
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import versions.Versions
 
-public class AndroidLibraryConfigurator(
-    private val multiplatformExtension: KotlinMultiplatformExtension,
-    private val libraryExtension: LibraryExtension,
-) {
-    public fun configureLibraryCompose(): LibraryExtension = libraryExtension.apply {
+public class AndroidLibraryConfigurator {
+
+    internal fun configureAndroidLibrary(
+        extension: LibraryExtension,
+    ): LibraryExtension = extension.apply {
+        compileSdk = Versions.androidCompileSdk
+
+        defaultConfig {
+            minSdk = Versions.androidMinSdk
+        }
+
+        compileOptions {
+            sourceCompatibility = Versions.javaVersion
+            targetCompatibility = Versions.javaVersion
+        }
+    }
+
+    internal fun configureLibraryCompose(
+        extension: LibraryExtension
+    ): LibraryExtension = extension.apply {
         buildFeatures {
             compose = true
         }
@@ -17,30 +32,17 @@ public class AndroidLibraryConfigurator(
         }
     }
 
-    public fun configureAndroidLibrary(androidNamespace: String): LibraryExtension =
-        libraryExtension.apply {
-            namespace = androidNamespace
-            compileSdk = Versions.androidCompileSdk
-
-            defaultConfig {
-                minSdk = Versions.androidMinSdk
-            }
-
-            compileOptions {
-                sourceCompatibility = Versions.javaVersion
-                targetCompatibility = Versions.javaVersion
-            }
-        }
-
-    public fun configureKotlinMultiplatform(): KotlinMultiplatformExtension {
-        return multiplatformExtension.apply {
-            jvmToolchain(Versions.jvmTarget)
-            androidTarget()
-            listOf(
-                iosX64(),
-                iosArm64(),
-                iosSimulatorArm64()
-            )
-        }
+    internal fun configureKotlinMultiplatform(
+        multiplatformExtension: KotlinMultiplatformExtension
+    ): KotlinMultiplatformExtension = multiplatformExtension.apply {
+        jvmToolchain(Versions.jvmTarget)
+        jvm()
+        wasmJs()
+        androidTarget()
+        listOf(
+            iosX64(),
+            iosArm64(),
+            iosSimulatorArm64()
+        )
     }
 }

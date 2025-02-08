@@ -5,9 +5,7 @@ import versions.Versions.kotlinxDatetimeVersion
 import versions.Versions.kotlinxSerializationVersion
 import extensions.dependency
 
-public class KotlinXDependencies(
-    private val extension: KotlinMultiplatformExtension
-) {
+public class KotlinXDependencies {
     public val kotlinxSerialization: String by lazy {
         dependency(
             groupWithArtifact = "org.jetbrains.kotlinx:kotlinx-serialization-json",
@@ -22,7 +20,9 @@ public class KotlinXDependencies(
         )
     }
 
-    public fun configureDependencies(): KotlinMultiplatformExtension = extension.apply {
+    public fun configureDependencies(
+        extension: KotlinMultiplatformExtension
+    ): KotlinMultiplatformExtension = extension.apply {
         sourceSets.apply {
             commonMain.dependencies {
                 implementation(kotlinxSerialization)

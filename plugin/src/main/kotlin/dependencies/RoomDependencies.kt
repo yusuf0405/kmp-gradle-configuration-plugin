@@ -5,9 +5,7 @@ import versions.Versions.roomVersion
 import versions.Versions.sqliteVersion
 import extensions.dependency
 
-public class RoomDependencies(
-    private val extension: KotlinMultiplatformExtension
-) {
+public class RoomDependencies {
     private val kspConfigurations = listOf(
         "kspAndroid",
         "kspIosSimulatorArm64",
@@ -38,11 +36,12 @@ public class RoomDependencies(
         dependency(groupWithArtifact = "androidx.sqlite:sqlite", version = sqliteVersion)
     }
 
-    public fun configureDependencies(): KotlinMultiplatformExtension = extension.apply {
+    public fun configureDependencies(
+        extension: KotlinMultiplatformExtension
+    ): KotlinMultiplatformExtension = extension.apply {
         project.dependencies.apply {
             kspConfigurations.forEach { add(it, roomCompiler) }
         }
-
         with(sourceSets) {
             commonMain.dependencies {
                 implementation(roomRuntime)

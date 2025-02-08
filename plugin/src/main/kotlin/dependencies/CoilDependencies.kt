@@ -4,9 +4,7 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import versions.Versions.coilVersion
 import extensions.dependency
 
-public class CoilDependencies(
-    private val extension: KotlinMultiplatformExtension
-) {
+public class CoilDependencies {
     public val compose: String by lazy {
         dependency(
             groupWithArtifact = "io.coil-kt.coil3:coil-compose",
@@ -35,7 +33,9 @@ public class CoilDependencies(
         )
     }
 
-    public fun configureDependencies(): KotlinMultiplatformExtension = extension.apply {
+    public fun configureDependencies(
+        extension: KotlinMultiplatformExtension
+    ): KotlinMultiplatformExtension = extension.apply {
         sourceSets.apply {
             commonMain.dependencies {
                 implementation(core)
